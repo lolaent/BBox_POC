@@ -3,7 +3,8 @@ spring:
     consumer:
       auto-offset-reset: earliest
       group-id: boot
+      value-deserializer: com.lolatech.springkafka.util.GenericDeserializer
 
 kafka:
   topic:
-    boot: syslog-format
+    boot: syslog-csv

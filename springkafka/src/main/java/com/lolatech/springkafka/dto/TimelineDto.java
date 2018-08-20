@@ -1,78 +1,33 @@
 package com.lolatech.springkafka.dto;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.springframework.data.annotation.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Document(indexName="timelinedto", type="timeline")
 public class TimelineDto {
 
-	@Id
 	private String id;
-
-    @JsonProperty("_messagetimems")
 	private String messageTimestamp;
-
-    @JsonProperty("_messagetime")
 	private String messageDateTime;
-
-    @JsonProperty("_raw")
 	private String content;
-
-    @JsonProperty("_collector")
 	private String collector;
-
-    @JsonProperty("dest_host")
 	private String destinationHost;
-
-    @JsonProperty("fac")
 	private String fac;
-
-    @JsonProperty("pri")
 	private String priority;
-
-    @JsonProperty("sev")
 	private String severity;
-
-    @JsonProperty("severity")
 	private String severityName;
-
-    @JsonProperty("_size")
 	private String size;
-
-    @JsonProperty("_source")
 	private String source;
-
-    @JsonProperty("_sourcecategory")
 	private String sourceCategory;
-
-    @JsonProperty("_sourcehost")
 	private String sourceHost;
-
-    @JsonProperty("_sourcename")
 	private String sourceName;
-
-    public TimelineDto(String id, String messageTimestamp, String messageDateTime, String content, String collector, String destinationHost, String fac,
-            String priority, String severity, String severityName, String size, String source, String sourceCategory, String sourceHost, String sourceName) {
-        this.id = id;
-        this.messageTimestamp = messageTimestamp;
-        this.messageDateTime = messageDateTime;
-        this.content = content;
-        this.collector = collector;
-        this.destinationHost = destinationHost;
-        this.fac = fac;
-        this.priority = priority;
-        this.severity = severity;
-        this.severityName = severityName;
-        this.size = size;
-        this.source = source;
-        this.sourceCategory = sourceCategory;
-        this.sourceHost = sourceHost;
-        this.sourceName = sourceName;
-    }
-
-    public TimelineDto() {
-    }
 
     public String getId() {
         return id;

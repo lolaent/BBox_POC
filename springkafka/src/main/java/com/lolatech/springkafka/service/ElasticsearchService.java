@@ -1,7 +1,7 @@
 package com.lolatech.springkafka.service;
 
-import com.lolatech.springkafka.util.ObjectTypesEnum;
+import com.lolatech.springkafka.dto.TimelineDto;
 
 public interface ElasticsearchService {
-    <T> void save(ObjectTypesEnum type, T data);
+    void save(TimelineDto data);
 }

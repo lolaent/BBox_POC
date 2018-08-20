@@ -3,7 +3,7 @@ package com.lolatech.springkafka.util;
 public enum ObjectTypesEnum {
 
 	SYSLOG_JSON("syslog-json"),
-	SYSLOG_CSV_STRING("syslog-csv");
+	SYSLOG_CSV("syslog-csv");
 	
 	private String type;
 	
