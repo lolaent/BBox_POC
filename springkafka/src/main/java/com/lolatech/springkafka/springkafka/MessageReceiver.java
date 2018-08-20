@@ -12,9 +12,6 @@ import com.lolatech.springkafka.util.ObjectTypesEnum;
 @ComponentScan(basePackages = "com.lolatech.springkafka")
 public class MessageReceiver {
 
-	//@Autowired
-	//private TimelineService service;
-	
 	@Autowired
 	private ElasticsearchService service;
 	

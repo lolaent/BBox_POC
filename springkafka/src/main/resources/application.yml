@@ -6,5 +6,4 @@ spring:
 
 kafka:
   topic:
-    boot: Hello-Kafka\
-          Test-Kafka
+    boot: syslog-format
