@@ -7,4 +7,5 @@ spring:
 
 kafka:
   topic:
-    boot: syslog-csv
+    boot: syslog-csv\
+          syslog-json

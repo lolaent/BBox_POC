@@ -1,6 +1,7 @@
 package com.lolatech.springkafka.util;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lolatech.springkafka.dto.TimelineDto;
@@ -19,16 +20,20 @@ public class GenericDeserializer implements Deserializer<TimelineDto> {
 
     @Override
     public TimelineDto deserialize(String topic, byte[] bytes) {
-        TimelineDto timelineDto = null;
+        TimelineDto timelineDto = new TimelineDto();
         String data = readData(bytes);
-
+        System.out.println(data);
         if (ObjectTypesEnum.SYSLOG_JSON.getType().equals(topic)) {
+            System.out.println("Json!");
             ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             try {
                 timelineDto = objectMapper.readValue(data,  TimelineDto.class);
             } catch (JsonParseException e) {
+                e.printStackTrace();
                 System.out.println("could not parse json");
             } catch (JsonMappingException e) {
+                e.printStackTrace();
                 System.out.println("could not map json");
             } catch (IOException e) {
                 System.out.println("could not retrieve json");
@@ -39,9 +44,7 @@ public class GenericDeserializer implements Deserializer<TimelineDto> {
             try {
                 String[] dataSplit = data.split(",");
                 System.out.println(data);
-                timelineDto = new TimelineDto(null, dataSplit[0], dataSplit[1], dataSplit[2],
-                        dataSplit[3], dataSplit[4], dataSplit[5], dataSplit[6], dataSplit[7], dataSplit[8], dataSplit[9], dataSplit[10],
-                        dataSplit[11], dataSplit[12], dataSplit[13]);
+                timelineDto = new TimelineDto(dataSplit[1], dataSplit[2]);
             } catch (Exception e) {
                 System.out.println("Something went wrong");
             }
@@ -50,7 +53,8 @@ public class GenericDeserializer implements Deserializer<TimelineDto> {
         return timelineDto;
     }
 
-    @Override public void close() {
+    @Override
+    public void close() {
 
     }
 
