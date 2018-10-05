@@ -15,9 +15,6 @@ import javax.annotation.PostConstruct;
 @Service
 @ComponentScan(basePackages = "com.lolatech.springkafka")
 public class MessageReceiver {
-
-	@Autowired
-	private ElasticsearchService service;
 	
 	@Autowired
 	private RedisAdapter redisAdapter;

@@ -30,12 +30,13 @@ public class TimelineDto {
 	}
 
 	public TimelineDto(String messageId, String transactionId, Map<String,String> tags, 
-			long datetime, String payload) {
+			long datetime, String payload, List<String> payloadContent) {
 		this.messageId = messageId;
 		this.transactionId = transactionId;
 		this.tags = tags;
 		this.datetime = datetime;
 		this.payload = payload;
+		this.payloadContent = payloadContent;
 	}
 	
 	@Id
@@ -53,8 +54,18 @@ public class TimelineDto {
 	
 	private String payload;
 	
+	private List<String> payloadContent;
 	
-    public String getMessageId() {
+	
+    public List<String> getPayloadContent() {
+		return payloadContent;
+	}
+
+	public void setPayloadContent(List<String> payloadContent) {
+		this.payloadContent = payloadContent;
+	}
+
+	public String getMessageId() {
 		return messageId;
 	}
 

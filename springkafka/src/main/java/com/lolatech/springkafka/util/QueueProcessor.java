@@ -3,6 +3,7 @@ package com.lolatech.springkafka.util;
 import org.redisson.api.RQueue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -22,14 +23,14 @@ public class QueueProcessor implements Runnable {
 	@Autowired
 	private ElasticsearchService elasticsearchService;	
 	
+	@Autowired
+	private Environment env;
+	
 	private SyslogParser parser;
 	
 	@Override
 	public void run() {
-		parser = new SyslogParser();
-		ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+		parser = new SyslogParser(env.getProperty("environment"));
 		
 		while(true) {
 			RQueue<String> messageQueue = redisAdapter.getQueue("SYSLOG");
@@ -48,7 +49,10 @@ public class QueueProcessor implements Runnable {
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				System.out.println("interrupted exception");
+			} catch(Exception e) {
+				System.out.println("some unexpected exception happened");
 			}
+			
 		}
 	}
 
