@@ -23,12 +23,22 @@ public class RedisAdapter {
 	@Value("${redis.timeout}")
 	private int redisTimeout;
 	
+	@Value("${redis.password}")
+	private String redisPassword;
+	
 	@PostConstruct
 	public void initialize() {
 		Config config = new Config();
 		
-		//config.useSingleServer().setAddress("http://localhost:6379").setTimeout(3000);
-		config.useSingleServer().setAddress(redisAddress).setTimeout(redisTimeout);
+		if(redisPassword.equals("")) {
+			config.useSingleServer().setAddress(redisAddress).setTimeout(redisTimeout);
+		} else {
+			config.useSingleServer().
+			    setAddress(redisAddress).
+			    setPassword(redisPassword).
+			    setTimeout(redisTimeout);
+		}
+		
 		
 		redissonClient = Redisson.create(config);
 	}
