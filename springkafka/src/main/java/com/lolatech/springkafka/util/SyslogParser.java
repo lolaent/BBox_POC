@@ -1,13 +1,10 @@
 package com.lolatech.springkafka.util;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -216,11 +213,15 @@ public class SyslogParser {
 					connection = new MemcachedClient( 
 					        new ConnectionFactoryBuilder().setDaemon(true).build(), 
 					        AddrUtil.getAddresses(address)); 
+					if( connection != null ) {
+						payloadContent = (String) connection.get(key);
+					}
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println("error reading from memcached");
+					connection.shutdown();
 					continue;
 				}
-				payloadContent = (String) connection.get(key);
+				
 				connection.shutdown();
 			}
 			

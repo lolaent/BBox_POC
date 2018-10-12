@@ -30,7 +30,7 @@ public class RedisAdapter {
 	public void initialize() {
 		Config config = new Config();
 		
-		if(redisPassword.equals("")) {
+		if(redisPassword.equals("") || redisPassword.equals(" ")) {
 			config.useSingleServer().setAddress(redisAddress).setTimeout(redisTimeout);
 		} else {
 			config.useSingleServer().

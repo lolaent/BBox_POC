@@ -1,13 +1,11 @@
 package com.lolatech.springkafka.springkafka;
 
 import com.lolatech.springkafka.adapter.RedisAdapter;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.redisson.api.RQueue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
-import com.lolatech.springkafka.service.ElasticsearchService;
 import com.lolatech.springkafka.service.RedisQueueService;
 
 import javax.annotation.PostConstruct;

@@ -4,12 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import com.lolatech.springkafka.dto.TimelineDto;
 import com.lolatech.springkafka.repository.TimelineRepository;
-import com.lolatech.springkafka.util.ObjectTypesEnum;
 
 @Service
 @EnableElasticsearchRepositories(basePackages = "com.lolatech.springkafka.repository")
