@@ -25,9 +25,9 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TimelineDto {
 
-	public TimelineDto() {		
+	public TimelineDto() {
+		
 	}
-
 	public TimelineDto(String messageId, String transactionId, Map<String,String> tags, 
 			long datetime, String payload, List<String> payloadContent) {
 		this.messageId = messageId;

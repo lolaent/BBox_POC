@@ -6,9 +6,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.lolatech.springkafka.adapter.RedisAdapter;
 import com.lolatech.springkafka.dto.TimelineDto;
 import com.lolatech.springkafka.service.ElasticsearchService;
