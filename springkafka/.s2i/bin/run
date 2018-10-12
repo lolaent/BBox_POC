@@ -23,4 +23,4 @@ fi
 
 sleep 60
 
-java -jar springkafka-0.0.1-SNAPSHOT.jar -Delasticsearch.host=${ELASTIC_HOST} -Delasticsearch.clustername=${ELASTIC_CLUSTERNAME} -Delasticsearch.port=${ELASTIC_PORT} -Denvironment=${ENVIRONMENT} -Dredis.address=${REDIS_ADDRESS} -Dredis.timeout=${REDIS_TIMEOUT} -Dredis.password=${REDIS_PASSWORD}
+java -jar springkafka-0.0.1-SNAPSHOT.jar
