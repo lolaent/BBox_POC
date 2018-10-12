@@ -20,7 +20,6 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @ToString
 @Document(indexName="timelinedto", type="timeline")
 @JsonIgnoreProperties(ignoreUnknown = true)

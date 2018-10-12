@@ -249,7 +249,7 @@ public class SyslogParser {
 			e.printStackTrace();
 		} catch (IOException e) {
 			System.out.println("an exception occured when reading url content");
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		return content;
