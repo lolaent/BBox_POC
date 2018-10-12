@@ -1,0 +1,3 @@
+#!/bin/bash -ex
+
+echo "run command here" && sleep 100
