@@ -3,6 +3,7 @@ package com.lolatech.springkafka.springkafka;
 import com.lolatech.springkafka.adapter.RedisAdapter;
 import org.redisson.api.RQueue;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class MessageReceiver {
 		redisQueueService.executeAsynchronously();
 	}
 	
-	MessageReceiver() {
+	MessageReceiver() {	
 	}
 	
 	@KafkaListener(topics = "#{'${kafka.topic.boot}'.split('\\\\ ')}", groupId = "boot")
