@@ -1,0 +1,26 @@
+#!/bin/bash
+set +e
+
+if [[ ${DEBUG} == "true" ]]; then set -x; else set +x; fi
+
+echo -e "\n---> run time\n"
+
+
+cd ${APP_HOME}
+
+if [ -s ".s2iconfig/vars.sh" ]; then
+	set +x
+	source .s2iconfig/vars.sh
+	if [[ ${DEBUG} == "true" ]]; then set -x; else set +x; fi
+
+	source /usr/local/bin/functions.sh
+	generate_config
+fi
+
+if [ -s ".s2iconfig/scripts/deploy.sh" ]; then
+	source .s2iconfig/scripts/deploy.sh
+fi
+
+sleep 60
+
+java -jar target/springkafka-0.0.1-SNAPSHOT.jar
