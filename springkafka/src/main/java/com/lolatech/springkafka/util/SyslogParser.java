@@ -23,6 +23,8 @@ import com.lolatech.springkafka.dto.UrlDto;
 import net.spy.memcached.AddrUtil;
 import net.spy.memcached.ConnectionFactoryBuilder;
 import net.spy.memcached.MemcachedClient;
+import net.spy.memcached.auth.AuthDescriptor;
+import net.spy.memcached.auth.PlainCallbackHandler;
 
 public class SyslogParser {
 
@@ -194,7 +196,6 @@ public class SyslogParser {
 			System.out.println("Unable to parse json!!!");
 			return null;
 		}
-		
 
 		for( UrlDto url : urlData ) {
 			String ip = url.getIp();
@@ -208,17 +209,15 @@ public class SyslogParser {
 			} else {
 				String address = ip + ":" + port;
 				try {
-					//client = new MemcachedClient(new InetSocketAddress(ip, Integer.parseInt(port)));
-					//client = new MemcachedClient(new InetSocketAddress("127.0.0.1", 11211));
-					connection = new MemcachedClient( 
-					        new ConnectionFactoryBuilder().setDaemon(true).build(), 
-					        AddrUtil.getAddresses(address)); 
+					connection = new MemcachedClient(AddrUtil.getAddresses(address));
 					if( connection != null ) {
 						payloadContent = (String) connection.get(key);
 					}
 				} catch (Exception e) {
-					System.out.println("error reading from memcached");
-					connection.shutdown();
+					System.out.println("error reading from memcached" + e);
+					if(connection != null) {
+						connection.shutdown();
+					}
 					continue;
 				}
 				
