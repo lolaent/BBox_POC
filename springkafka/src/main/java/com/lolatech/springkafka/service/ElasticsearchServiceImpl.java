@@ -10,7 +10,7 @@ import com.lolatech.springkafka.dto.TimelineDto;
 import com.lolatech.springkafka.repository.TimelineRepository;
 
 @Service
-@EnableElasticsearchRepositories(basePackages = "com.lolatech.springkafka.repository")
+//@EnableElasticsearchRepositories(basePackages = "com.lolatech.springkafka.repository")
 public class ElasticsearchServiceImpl implements ElasticsearchService {
 
 	private TimelineRepository timelineRepository;
