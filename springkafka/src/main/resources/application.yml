@@ -6,5 +6,6 @@ spring:
 
 kafka:
   topic:
-    boot: Hello-Kafka\
-          Test-Kafka
+    boot: syslog-csv\
+          syslog-json\
+          g4-log-consumer

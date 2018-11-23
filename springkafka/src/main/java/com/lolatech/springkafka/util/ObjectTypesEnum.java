@@ -2,7 +2,8 @@ package com.lolatech.springkafka.util;
 
 public enum ObjectTypesEnum {
 
-	TEST("Test-Kafka"), HELLO("Hello-Kafka");
+	SYSLOG_JSON("syslog-json"),
+	SYSLOG_CSV("syslog-csv");
 	
 	private String type;
 	

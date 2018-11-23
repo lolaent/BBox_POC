@@ -1,37 +1,37 @@
 package com.lolatech.springkafka.springkafka;
 
-import org.apache.kafka.clients.consumer.ConsumerRecord;
+import com.lolatech.springkafka.adapter.RedisAdapter;
+import org.redisson.api.RQueue;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
-import com.lolatech.springkafka.service.ElasticsearchService;
-import com.lolatech.springkafka.util.ObjectTypesEnum;
+import com.lolatech.springkafka.service.RedisQueueService;
+
+import javax.annotation.PostConstruct;
 
 @Service
 @ComponentScan(basePackages = "com.lolatech.springkafka")
 public class MessageReceiver {
-
-	//@Autowired
-	//private TimelineService service;
 	
 	@Autowired
-	private ElasticsearchService service;
+	private RedisAdapter redisAdapter;
 	
-	MessageReceiver() {
-		System.out.println("messagereceiver_000_created.");
+	@Autowired
+	RedisQueueService redisQueueService;
+	
+	@PostConstruct
+	public void initialize() {
+		redisQueueService.executeAsynchronously();
 	}
 	
-	@KafkaListener(topics = "#{'${kafka.topic.boot}'.split('\\\\ ')}")
-	public void receive(ConsumerRecord<?, ?> consumerRecord) {
-	  System.out.println("received payload = " + consumerRecord.toString());
-	  ObjectTypesEnum type = ObjectTypesEnum.valueOf(getTopicName(consumerRecord.topic()));
-	  service.save(type, consumerRecord.value());
+	MessageReceiver() {	
 	}
 	
-	private String getTopicName(String topic){
-		String[] topics = topic.split("-");
-		
-		return topics[0].toUpperCase();
+	@KafkaListener(topics = "#{'${kafka.topic.boot}'.split('\\\\ ')}", groupId = "boot")
+	public void receive(String content) {
+		RQueue<String> queue = redisAdapter.getQueue("SYSLOG");
+		queue.add(content);
 	}
 }
